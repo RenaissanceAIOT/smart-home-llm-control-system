@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this prototype, cite the repository and the accompanying project report."
+title: "Smart Home LLM Control System"
+type: software
+version: 0.1.0
+date-released: 2026-10-01
+authors:
+  - family-names: Shi
+    given-names: Xuan
+  - family-names: Tang
+    given-names: Guanchu
+  - family-names: Li
+    given-names: Guankun
+  - family-names: Wang
+    given-names: Yizhuo
+repository-code: "https://github.com/RenaissanceAIOT/smart-home-llm-control-system"
+

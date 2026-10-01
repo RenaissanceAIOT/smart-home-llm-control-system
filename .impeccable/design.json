@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T02:00:48Z",
+  "title": "Design System: HomeSignal",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "仪表纸" },
+      "paper-deep": { "role": "neutral", "displayName": "深纸" },
+      "ink": { "role": "neutral", "displayName": "墨色" },
+      "muted": { "role": "neutral", "displayName": "注释灰" },
+      "rail": { "role": "neutral", "displayName": "石墨轨道" },
+      "line": { "role": "neutral", "displayName": "铅线" },
+      "signal-green": { "role": "primary", "displayName": "联锁绿" },
+      "signal-amber": { "role": "secondary", "displayName": "待确认琥珀" },
+      "signal-red": { "role": "tertiary", "displayName": "拒绝红" },
+      "signal-green-bright": { "role": "primary", "displayName": "通行灯绿" },
+      "signal-amber-bright": { "role": "secondary", "displayName": "警示灯琥珀" },
+      "on-dark": { "role": "neutral", "displayName": "轨道反白" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "主命题", "purpose": "首屏安全命题；紧凑换行形成视觉锚点。" },
+      "body": { "displayName": "正文", "purpose": "中文说明、设备信息与研究边界。" },
+      "label": { "displayName": "操作标签", "purpose": "系统边界、状态与审计字段。" }
+    },
+    "shadows": [
+      { "name": "route-lift", "value": "0 16px 34px rgba(38, 50, 48, 0.16)", "purpose": "仅抬升完整信号路线。" },
+      { "name": "button-hover", "value": "0 6px 16px rgba(38, 50, 48, 0.14)", "purpose": "按钮悬停时配合 1px 上移。" },
+      { "name": "lamp-idle-inset", "value": "inset 0 0 0 2px rgba(0, 0, 0, 0.25)", "purpose": "待机信号灯的暗内环。" },
+      { "name": "lamp-green-live", "value": "0 0 0 5px rgba(69, 214, 169, 0.15), 0 0 18px rgba(69, 214, 169, 0.55)", "purpose": "已通过与当前节点的双层灯光辉光。" },
+      { "name": "lamp-amber-blocked", "value": "0 0 0 5px rgba(242, 168, 59, 0.14)", "purpose": "被联锁暂停节点的琥珀光环。" }
+    ],
+    "motion": [
+      { "name": "signal-resolve", "value": "620ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "当前或阻断信号灯从缩小、模糊状态解析为清晰状态。" },
+      { "name": "button-feedback", "value": "160ms ease-out", "purpose": "按钮位移与阴影的悬停反馈。" },
+      { "name": "reduced-motion", "value": "0.01ms", "purpose": "在 prefers-reduced-motion 下近似禁用动画和过渡。" }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Route",
+      "kind": "custom",
+      "refersTo": "signal-route",
+      "description": "以连续轨道、灯点和文字状态呈现五阶段安全链路。",
+      "html": "<div class=\"ds-route\"><div class=\"ds-route-step ds-complete\"><i></i><b>输入</b><span>已通过</span></div><div class=\"ds-route-step ds-complete\"><i></i><b>识别</b><span>已通过</span></div><div class=\"ds-route-step ds-complete\"><i></i><b>规划</b><span>已通过</span></div><div class=\"ds-route-step ds-blocked\"><i></i><b>联锁</b><span>待确认</span></div><div class=\"ds-route-step\"><i></i><b>执行</b><span>等待</span></div></div>",
+      "css": ".ds-route{display:grid;grid-template-columns:repeat(5,1fr);overflow:hidden;background:var(--rail,#263230);color:#fff;border-radius:14px;box-shadow:0 16px 34px rgba(38,50,48,.16);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}.ds-route-step{position:relative;min-height:118px;padding:1.15rem 1.1rem 1rem;border-right:1px solid rgba(255,255,255,.17)}.ds-route-step:last-child{border-right:0}.ds-route-step:after{content:'';position:absolute;top:1.5rem;left:2.25rem;right:-.65rem;height:2px;background:#5d6966}.ds-route-step:last-child:after{display:none}.ds-route-step i{position:relative;z-index:1;display:block;width:13px;height:13px;border-radius:50%;background:#76817e;box-shadow:inset 0 0 0 2px rgba(0,0,0,.25)}.ds-route-step b{display:block;margin-top:.58rem;font-size:1.05rem}.ds-route-step span{display:block;margin-top:.35rem;color:#9faaa7;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase}.ds-route-step.ds-complete:after{background:#45d6a9}.ds-route-step.ds-complete i{background:#45d6a9;box-shadow:0 0 0 5px rgba(69,214,169,.15),0 0 18px rgba(69,214,169,.55)}.ds-route-step.ds-complete span{color:#74e4c2}.ds-route-step.ds-blocked:after{background:linear-gradient(90deg,#f2a83b 0 44%,#5d6966 44% 100%)}.ds-route-step.ds-blocked i{background:#f2a83b;box-shadow:0 0 0 5px rgba(242,168,59,.14);animation:ds-signal-resolve 620ms cubic-bezier(.16,1,.3,1) both}.ds-route-step.ds-blocked span{color:#ffc363}@keyframes ds-signal-resolve{from{transform:scale(.72);filter:blur(2px)}to{transform:scale(1);filter:blur(0)}}@media(max-width:760px){.ds-route{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-route-step{min-height:58px;padding:.55rem .55rem .42rem 2rem}.ds-route-step:nth-child(3){grid-column:2;grid-row:2}.ds-route-step:nth-child(4){grid-column:1;grid-row:2}.ds-route-step:nth-child(5){grid-column:1/-1;grid-row:3}.ds-route-step b{margin-top:0;font-size:.9rem}.ds-route-step i{position:absolute;top:.72rem;left:.7rem;width:11px;height:11px}}@media(prefers-reduced-motion:reduce){.ds-route *{animation-duration:.01ms!important}}"
+    },
+    {
+      "name": "Control Button",
+      "kind": "button",
+      "refersTo": "control-button",
+      "description": "安静的描边操作按钮，在悬停与键盘焦点时提供明确反馈。",
+      "html": "<button class=\"ds-control-button\">发送到安全控制链路</button>",
+      "css": ".ds-control-button{color:var(--ink,#18201f);border:1px solid var(--rail,#263230);border-radius:9px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;font-weight:700;transition:transform 160ms ease-out,box-shadow 160ms ease-out}.ds-control-button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(38,50,48,.14)}.ds-control-button:focus-visible{outline:3px solid #f2a83b;outline-offset:2px}.ds-control-button:disabled{opacity:.55;cursor:not-allowed}"
+    },
+    {
+      "name": "Natural-language Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "输入自然语言指令的多行字段，使用琥珀光标和高可见焦点环。",
+      "html": "<textarea class=\"ds-command-field\" rows=\"4\" placeholder=\"例如：屋里太闷了，帮我通通风\"></textarea>",
+      "css": ".ds-command-field{color:var(--ink,#18201f);caret-color:var(--signal-amber,#bd6b18);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}.ds-command-field::placeholder{color:#66706d;opacity:1}.ds-command-field:focus-visible{outline:3px solid #f2a83b;outline-offset:2px}"
+    },
+    {
+      "name": "System Boundary Badge",
+      "kind": "chip",
+      "refersTo": "system-badge",
+      "description": "在首屏声明模拟运行与无真实设备连接的边界标签。",
+      "html": "<span class=\"ds-system-badge\">Simulation / No live devices</span>",
+      "css": ".ds-system-badge{display:inline-block;color:var(--ink,#18201f);border:1px solid var(--rail,#263230);padding:.55rem .8rem;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}@media(max-width:760px){.ds-system-badge{padding:.32rem .48rem;font-size:.64rem}}"
+    },
+    {
+      "name": "Executed Status",
+      "kind": "chip",
+      "refersTo": "status-executed",
+      "description": "表示计划已通过联锁并完成模拟执行。",
+      "html": "<span class=\"ds-status-executed\">executed</span>",
+      "css": ".ds-status-executed{display:inline-block;padding:.42rem .68rem;color:#fff;background:var(--signal-green,#117a65);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:800;border-radius:999px}"
+    },
+    {
+      "name": "Confirmation Required Status",
+      "kind": "chip",
+      "refersTo": "status-confirmation-required",
+      "description": "表示高风险计划已被联锁暂停并等待明确确认。",
+      "html": "<span class=\"ds-status-confirmation\">confirmation required</span>",
+      "css": ".ds-status-confirmation{display:inline-block;padding:.42rem .68rem;color:#fff;background:var(--signal-amber,#bd6b18);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:800;border-radius:999px}"
+    },
+    {
+      "name": "Rejected Status",
+      "kind": "chip",
+      "refersTo": "status-rejected",
+      "description": "表示指令因安全规则或无匹配结果而终止。",
+      "html": "<span class=\"ds-status-rejected\">rejected</span>",
+      "css": ".ds-status-rejected{display:inline-block;padding:.42rem .68rem;color:#fff;background:var(--signal-red,#a43b32);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:800;border-radius:999px}"
+    },
+    {
+      "name": "Section Tabs",
+      "kind": "nav",
+      "refersTo": "navigation-tab",
+      "description": "以细底线组织控制、设备、自动化与研究四个工作区。",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"工作区\"><button class=\"ds-tab ds-active\">控制台</button><button class=\"ds-tab\">设备状态</button><button class=\"ds-tab\">自动化记忆</button><button class=\"ds-tab\">实验与数据</button></nav>",
+      "css": ".ds-tabs{display:flex;gap:.4rem;border-bottom:1px solid var(--line,#b9b2a5);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}.ds-tab{border-radius:8px 8px 0 0}.ds-tab:focus-visible{outline:3px solid #f2a83b;outline-offset:2px}@media(max-width:760px){.ds-tabs{gap:0}.ds-tab{padding-left:.55rem;padding-right:.55rem}}"
+    },
+    {
+      "name": "Decision Trace Row",
+      "kind": "custom",
+      "refersTo": "decision-trace-row",
+      "description": "以固定标签列和弹性值列呈现可审计决策字段。",
+      "html": "<dl class=\"ds-trace\"><div class=\"ds-trace-row\"><dt>风险等级</dt><dd>high · requires confirmation</dd></div></dl>",
+      "css": ".ds-trace{margin:0;border-top:2px solid var(--rail,#263230);padding-top:1rem;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}.ds-trace-row{display:grid;grid-template-columns:140px 1fr;gap:1.2rem;padding:.72rem 0;border-bottom:1px solid var(--line,#b9b2a5)}.ds-trace-row dt{color:var(--muted,#56605d);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}.ds-trace-row dd{margin:0;color:var(--ink,#18201f);font-weight:650}@media(max-width:760px){.ds-trace-row{grid-template-columns:1fr;gap:.2rem}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "安全信号台 / Railway Signal Desk",
+    "overview": "HomeSignal 把自然语言控制理解为一段必须逐站通过联锁的信号，而不是一次不可见的聊天式推断。暖色仪表纸承载内容，石墨色轨道组织关键流程，绿、琥珀与红色信号只在状态需要被判断时出现；整个界面应像一张可信、可查、可操作的控制桌。\n\n这是一套紧凑但不拥挤的 Operate 界面。视觉表达来自清晰的线路、编号式操作标签、状态灯与审计轨迹，而不是装饰性科技效果。桌面与移动端共享同一条五阶段路线；移动端改变折线路径，不改变流程顺序或语义。",
+    "keyCharacteristics": [
+      "暖仪表纸底色与高对比石墨轨道。",
+      "一条连续的五阶段控制路线，而非分散的进度卡片。",
+      "信号绿、琥珀、红与文字状态共同表达安全结果。",
+      "中文系统无衬线字体，优先保障可读性、加载可靠性与许可清晰度。",
+      "扁平、可审计的信息层级，只在路线与交互反馈上使用有限抬升。"
+    ],
+    "rules": [
+      { "name": "The Signal-Is-State Rule", "body": "信号色必须对应可解释的执行状态，并始终与文字标签共同出现；颜色不能单独承担含义。", "section": "colors" },
+      { "name": "The Paper-Before-Chrome Rule", "body": "让纸张与石墨中性色占据画面，明亮信号色保持稀少，才能让一次状态变化真正可见。", "section": "colors" },
+      { "name": "The Local-Legibility Rule", "body": "中文界面使用系统无衬线字体，不为氛围引入下载字体或窄体替代品；操作感由排版关系而非字体噱头完成。", "section": "typography" },
+      { "name": "The One-Route Rule", "body": "响应式重排只能折叠同一条路线，不能把五个阶段拆成互不相关的卡片或改写其语义顺序。", "section": "layout" },
+      { "name": "The Flat-by-Default Rule", "body": "普通表单、轨迹行、指标和标签页依靠细线与留白分层；常驻阴影只属于信号路线。", "section": "elevation" },
+      { "name": "The Engineered-Corner Rule", "body": "圆角根据部件功能分级，不给所有容器套用同一个柔软卡片轮廓。", "section": "shapes" }
+    ],
+    "dos": [
+      "Do 让暖纸背景、石墨路线与一条连续的五阶段流程构成每个主操作面的视觉骨架。",
+      "Do 让绿、琥珀、红状态同时带有明确文字，并保持焦点轮廓清晰可见。",
+      "Do 在移动端保留完整阶段顺序和路线连续性，即使需要折成蛇形。",
+      "Do 使用中文系统无衬线字体与本地回退，优先保证阅读、加载和许可可靠性。",
+      "Do 把模拟执行、无真实设备等边界放在首屏可见位置。"
+    ],
+    "donts": [
+      "Don't 把界面改造成聊天气泡、消息流或黑箱式 AI 助手仪表盘。",
+      "Don't 用大面积信号色、渐变科技光或泛滥阴影稀释状态信号。",
+      "Don't 把每个区块包进相同的圆角卡片；表单和审计轨迹应依靠轨道线与留白组织。",
+      "Don't 仅靠颜色表达通过、待确认、拒绝或焦点状态。",
+      "Don't 使用下载型展示字体替换中文系统字体，或暗示界面已连接真实家居硬件。"
+    ]
+  }
+}

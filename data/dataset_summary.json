@@ -1,0 +1,33 @@
+{
+  "name": "smart_home_commands_synthetic",
+  "version": "1.0.0",
+  "seed": 20260606,
+  "rows": 1119,
+  "provenance": "synthetic; generated from committed templates; no real user data",
+  "instruction_type": {
+    "explicit": 526,
+    "implicit": 593
+  },
+  "subtype": {
+    "parameter": 114,
+    "switch": 412,
+    "sensation": 287,
+    "scene": 236,
+    "health": 70
+  },
+  "device_category": {
+    "lighting": 382,
+    "kitchen_bath": 361,
+    "climate": 171,
+    "door_window": 77,
+    "curtain": 52,
+    "appliance": 33,
+    "media": 25,
+    "security": 18
+  },
+  "split": {
+    "train": 895,
+    "validation": 112,
+    "test": 112
+  }
+}

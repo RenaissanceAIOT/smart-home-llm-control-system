@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Smart Home Synthetic Command Row",
+  "type": "object",
+  "required": [
+    "sample_id",
+    "utterance",
+    "instruction_type",
+    "subtype",
+    "intent",
+    "room",
+    "primary_device_id",
+    "primary_device_name",
+    "device_category",
+    "expected_commands_json",
+    "split",
+    "source",
+    "privacy"
+  ],
+  "properties": {
+    "sample_id": {"type": "string", "pattern": "^SHC-[0-9]{4}$"},
+    "utterance": {"type": "string", "minLength": 1},
+    "instruction_type": {"enum": ["explicit", "implicit"]},
+    "subtype": {"enum": ["switch", "parameter", "sensation", "scene", "health"]},
+    "intent": {"type": "string"},
+    "room": {"type": "string"},
+    "primary_device_id": {"type": "string"},
+    "primary_device_name": {"type": "string"},
+    "device_category": {"type": "string"},
+    "expected_commands_json": {"type": "string"},
+    "split": {"enum": ["train", "validation", "test"]},
+    "source": {"const": "synthetic_template_v1"},
+    "privacy": {"const": "contains_no_real_user_data"}
+  },
+  "additionalProperties": false
+}

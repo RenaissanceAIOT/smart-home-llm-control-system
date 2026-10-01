@@ -1,0 +1,12 @@
+{
+  "evaluation_kind": "synthetic_coverage_check",
+  "warning": "Not comparable to the historical metrics in the PDF and not a real-world accuracy estimate.",
+  "dataset": "data/smart_home_commands_synthetic.csv",
+  "samples": 1119,
+  "intent_match_rate": 1.0,
+  "status_counts": {
+    "executed": 1052,
+    "confirmation_required": 67
+  },
+  "top_confusions": []
+}
